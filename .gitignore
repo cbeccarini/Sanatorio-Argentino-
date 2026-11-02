@@ -1,0 +1,14 @@
+# Ignorar dependencias de Node
+node_modules/
+
+# Ignorar archivos privados
+.env
+.env.*
+!.env.example
+
+# Ignorar archivos de compilación
+dist/
+build/
+
+# Ignorar archivos temporales
+*.log

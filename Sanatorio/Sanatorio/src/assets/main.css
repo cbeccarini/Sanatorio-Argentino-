@@ -1,0 +1,404 @@
+/* ==========================================================================
+   1. VARIABLES DE TEMA DRIVE (MODO CLARO Y MODO OSCURO GLOBAL)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Roboto:wght@400;500&display=swap');
+
+:root {
+  --dt-background: #f8fafc;
+  --dt-surface: #ffffff;
+  --dt-surface-container: #f1f5f9;
+  --dt-surface-variant: #e2e8f0;
+  --dt-on-surface: #0f172a;
+  --dt-on-surface-variant: #475569;
+  --dt-primary: #1a73e8;
+  --dt-primary-container: #d3e3fd;
+  --dt-on-primary-container: #041e49;
+  --dt-outline: #cbd5e1;
+  --dt-danger: #d93025;
+  --dt-danger-container: #fce8e6;
+  --dt-shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* Aplicación exhaustiva de Modo Oscuro */
+.LgGVmb,
+[data-theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+.dark-theme,
+.dark {
+  --dt-background: #131314 !important;
+  --dt-surface: #1e1f20 !important;
+  --dt-surface-container: #282a2c !important;
+  --dt-surface-variant: #333537 !important;
+  --dt-on-surface: #e3e3e3 !important;
+  --dt-on-surface-variant: #ababab !important;
+  --dt-primary: #a8c7fa !important;
+  --dt-primary-container: #0842a0 !important;
+  --dt-on-primary-container: #d3e3fd !important;
+  --dt-outline: #444746 !important;
+  --dt-danger: #f2b8b5 !important;
+  --dt-danger-container: #601410 !important;
+  --dt-shadow: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ==========================================================================
+   2. REGLAS BASE GLOBALES
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--dt-background) !important;
+  color: var(--dt-on-surface) !important;
+  font-family: "Google Sans Text", Roboto, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Scrollbar estilo Google */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(140, 140, 140, 0.3);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(140, 140, 140, 0.5);
+}
+
+/* ==========================================================================
+   3. ARREGLO DE CONTENEDORES Y LIMPIEZA DE MARCOS DUPLICADOS
+   ========================================================================== */
+
+.seccion-container,
+.modulo-subida-wrapper,
+.panel-contenedor,
+.card,
+.panel,
+div:has(> .upload-box),
+[class*="modulo-"],
+[class*="contenedor-"],
+[class*="seccion-"] {
+  background-color: var(--dt-background) !important;
+  color: var(--dt-on-surface) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   4. ANULACIÓN DE ESPECIFICIDAD SOBRE SubirArchivo.vue (<style scoped>)
+   ========================================================================== */
+
+/* Caja principal del uploader */
+html body .upload-box {
+  background-color: var(--dt-surface) !important;
+  color: var(--dt-on-surface) !important;
+  border: 2px dashed var(--dt-outline) !important;
+  border-radius: 16px !important;
+  padding: 28px 20px !important;
+  max-width: 650px !important;
+  margin: 0 auto 24px auto !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* Textos dentro de la caja de subida */
+html body .upload-box h3,
+html body .upload-box strong,
+html body .upload-box span,
+html body .upload-box p,
+html body .upload-box li,
+html body .upload-box label {
+  color: var(--dt-on-surface) !important;
+}
+
+/* Lista previa de subida */
+html body .upload-box .lista-pre-subida {
+  background-color: var(--dt-surface-container) !important;
+  color: var(--dt-on-surface) !important;
+  border: 1px solid var(--dt-outline) !important;
+  border-radius: 8px !important;
+}
+
+/* Input file */
+html body .upload-box input[type="file"] {
+  color: var(--dt-on-surface) !important;
+}
+
+/* Botón "Subir al Servidor" (Azul Celeste) */
+html body .upload-box .btn-subir,
+html body .upload-box button.btn-subir {
+  background-color: #a8c7fa !important;
+  color: #041e49 !important;
+  border: none !important;
+  border-radius: 20px !important;
+  padding: 10px 24px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease, opacity 0.2s ease !important;
+}
+
+html body .upload-box .btn-subir:hover:not(:disabled) {
+  background-color: #7cacf8 !important;
+  opacity: 1 !important;
+}
+
+html body .upload-box .btn-subir:disabled {
+  background-color: var(--dt-outline) !important;
+  color: var(--dt-on-surface-variant) !important;
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+/* Texto de error/resultado */
+html body .upload-box .resultado-txt {
+  color: var(--dt-danger) !important;
+}
+
+html body .upload-box .resultado-txt.exito {
+  color: #38a169 !important;
+}
+
+/* ==========================================================================
+   5. MÓDULO DE ARCHIVOS GUARDADOS, TARJETAS Y ACCIONES SEPARADAS
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6,
+.titulo-seccion,
+[class*="titulo-"] {
+  color: var(--dt-on-surface) !important;
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 12px !important;
+}
+
+/* Contenedor/mensaje vacío */
+html[data-theme="dark"] body .sin-archivos,
+html[data-theme="dark"] body .no-files,
+html[data-theme="dark"] body .vacio-mensaje,
+html[data-theme="dark"] body div:has(> p),
+.dark body [class*="sin-archivos"],
+.dark body [class*="vacio"],
+.dark body [class*="empty"] {
+  background-color: var(--dt-surface) !important;
+  color: var(--dt-primary) !important;
+  border: 1px dashed var(--dt-outline) !important;
+  border-radius: 12px !important;
+}
+
+html[data-theme="dark"] body p,
+.dark body p {
+  color: var(--dt-on-surface) !important;
+}
+
+/* GRILLA DE TARJETAS (CARPETAS Y ARCHIVOS) */
+.lista-carpetas,
+.grid-carpetas,
+.contenedor-carpetas,
+.lista-archivos,
+.grid-archivos,
+html body div:has(> .archivo-card) {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  flex-direction: row !important;
+  gap: 16px !important;
+  width: 100% !important;
+  clear: both !important;
+}
+
+/* Tarjeta individual - Ampliada a 380px para garantizar espacio horizontal de 3 botones */
+.archivo-card,
+.tarjeta-carpeta,
+.tarjeta-archivo,
+[class*="card-archivo"],
+[class*="card-carpeta"] {
+  flex: 1 1 380px !important;
+  min-width: 380px !important;
+  max-width: 480px !important;
+  background-color: var(--dt-surface) !important;
+  border: 1px solid var(--dt-outline) !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 6px var(--dt-shadow) !important;
+  transition: transform 0.15s ease, border-color 0.15s ease !important;
+}
+
+.archivo-card:hover,
+.tarjeta-carpeta:hover,
+.tarjeta-archivo:hover {
+  border-color: var(--dt-primary) !important;
+  transform: translateY(-2px) !important;
+}
+
+.archivo-card > div:first-child,
+.carpeta-header-info,
+.archivo-header-info {
+  padding: 12px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  background-color: transparent !important;
+  min-width: 0 !important;
+}
+
+.archivo-nombre,
+.tarjeta-carpeta span,
+.tarjeta-archivo span {
+  color: var(--dt-on-surface) !important;
+  font-weight: 500 !important;
+  font-size: 0.88rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* SOLUCIÓN AL RECORTADO DE BOTONES (Descargar, Renombrar, Compartir) */
+html body .acciones-btn,
+html body .archivo-card > div:last-child,
+html body .tarjeta-carpeta > div:last-child,
+html body .tarjeta-archivo > div:last-child {
+  background-color: transparent !important;
+  border-top: 1px solid var(--dt-outline) !important;
+  padding: 8px 10px !important;
+  display: flex !important;
+  flex-wrap: wrap !important; /* Si no entra, baja de línea sin cortarse */
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* Estilo individual para cada botón dentro de las tarjetas */
+html body .acciones-btn button,
+html body .archivo-card button,
+html body .tarjeta-carpeta button,
+html body .tarjeta-archivo button,
+html body .btn-revisar {
+  flex: 1 1 30% !important; /* Toma un tercio exacto de la tarjeta cada uno */
+  min-width: 90px !important; /* Ancho mínimo para que quepa la palabra Compartir */
+  background-color: var(--dt-surface-container) !important;
+  color: var(--dt-on-surface) !important;
+  border: 1px solid var(--dt-outline) !important;
+  border-radius: 8px !important;
+  padding: 6px 4px !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Hover en 'Revisar', 'Descargar', 'Renombrar', 'Compartir' */
+html body .acciones-btn button:hover,
+html body .archivo-card button:hover,
+html body .tarjeta-carpeta button:hover,
+html body .tarjeta-archivo button:hover,
+html body .btn-revisar:hover {
+  background-color: var(--dt-primary-container) !important;
+  color: var(--dt-on-primary-container) !important;
+  border-color: var(--dt-primary) !important;
+}
+
+/* Hover específico en 'Eliminar' */
+html body .btn-eliminar,
+html body button.btn-eliminar-ico {
+  color: var(--dt-danger) !important;
+}
+
+html body .btn-eliminar:hover,
+html body button.btn-eliminar-ico:hover {
+  background-color: var(--dt-danger-container) !important;
+  border-color: var(--dt-danger) !important;
+}
+
+/* ==========================================================================
+   6. INPUTS, CONTROLES Y RECUADRO "CREAR CARPETA" (HOVER)
+   ========================================================================== */
+
+.caja-crear-carpeta,
+.crear-carpeta-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
+  width: 100% !important;
+  max-width: 500px !important;
+}
+
+.input-busqueda-clinica,
+input[type="text"],
+input[type="search"] {
+  background-color: var(--dt-surface-container) !important;
+  color: var(--dt-on-surface) !important;
+  border: 1px solid var(--dt-outline) !important;
+  border-radius: 24px !important;
+  padding: 10px 18px !important;
+  outline: none !important;
+  font-size: 0.9rem !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.input-busqueda-clinica:focus,
+input[type="text"]:focus,
+input[type="search"]:focus {
+  border-color: var(--dt-primary) !important;
+  box-shadow: 0 0 0 2px var(--dt-primary-container) !important;
+}
+
+.modulo-archivos {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Botón "Crear Carpeta" base */
+html body .btn-crear-carpeta,
+html body .caja-crear-carpeta button,
+html body button[class*="crear"] {
+  background-color: var(--dt-surface) !important;
+  color: var(--dt-primary) !important;
+  border: 1px solid var(--dt-outline) !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* Recuadro y destaque al pasar el cursor (Hover) */
+html body .btn-crear-carpeta:hover,
+html body .caja-crear-carpeta button:hover,
+html body button[class*="crear"]:hover {
+  background-color: var(--dt-primary-container) !important;
+  color: var(--dt-on-primary-container) !important;
+  border: 2px solid var(--dt-primary) !important;
+  box-shadow: 0 2px 8px var(--dt-shadow) !important;
+  transform: translateY(-1px) !important;
+}
